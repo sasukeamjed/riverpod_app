@@ -34,10 +34,10 @@ class CountNotifier extends StateNotifier<Counter>{
 
 final provider = StateNotifierProvider((ref)=> CountNotifier());
 
-class MyHome extends HookWidget {
+class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final counter = useProvider(provider.state);
+
     return Scaffold(
       appBar: AppBar(
         title: Text("RiverPod"),
@@ -47,7 +47,7 @@ class MyHome extends HookWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("This is how many times the button is clicked:"),
-            Text("${counter.count}"),
+            CounterTextWidget(),
           ],
         ),
       ),
@@ -58,6 +58,14 @@ class MyHome extends HookWidget {
         },
       ),
     );
+  }
+}
+
+class CounterTextWidget extends HookWidget{
+  @override
+  Widget build(BuildContext context) {
+    final countProvider = useProvider(provider.state);
+    return Text("${countProvider.count}");
   }
 }
 
